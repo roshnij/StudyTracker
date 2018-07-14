@@ -1,0 +1,320 @@
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var StudyTracker = function (_React$Component) {
+    _inherits(StudyTracker, _React$Component);
+
+    function StudyTracker() {
+        _classCallCheck(this, StudyTracker);
+
+        return _possibleConstructorReturn(this, (StudyTracker.__proto__ || Object.getPrototypeOf(StudyTracker)).apply(this, arguments));
+    }
+
+    _createClass(StudyTracker, [{
+        key: "render",
+        value: function render() {
+            var title = "Study Tracker";
+            var subtitle = "Track your exam prep";
+            var topics = ["CoreJava", "C++", "C"];
+            return React.createElement(
+                "div",
+                null,
+                React.createElement(Header, { title: title, subtitle: subtitle }),
+                React.createElement(Topics, { topics: topics }),
+                React.createElement(Action, null),
+                React.createElement(AddTopics, null)
+            );
+        }
+    }]);
+
+    return StudyTracker;
+}(React.Component);
+
+var Header = function (_React$Component2) {
+    _inherits(Header, _React$Component2);
+
+    function Header() {
+        _classCallCheck(this, Header);
+
+        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+    }
+
+    _createClass(Header, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                null,
+                React.createElement(
+                    "h1",
+                    null,
+                    " ",
+                    this.props.title,
+                    " "
+                ),
+                React.createElement(
+                    "h2",
+                    null,
+                    " ",
+                    this.props.subtitle
+                )
+            );
+        }
+    }]);
+
+    return Header;
+}(React.Component);
+
+var Action = function (_React$Component3) {
+    _inherits(Action, _React$Component3);
+
+    function Action() {
+        _classCallCheck(this, Action);
+
+        return _possibleConstructorReturn(this, (Action.__proto__ || Object.getPrototypeOf(Action)).apply(this, arguments));
+    }
+
+    _createClass(Action, [{
+        key: "handlePick",
+        value: function handlePick() {}
+    }, {
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                null,
+                React.createElement(
+                    "button",
+                    { onClick: this.handlePick },
+                    " What Should I do? "
+                )
+            );
+        }
+    }]);
+
+    return Action;
+}(React.Component);
+//options component here
+
+
+var Topics = function (_React$Component4) {
+    _inherits(Topics, _React$Component4);
+
+    function Topics(props) {
+        _classCallCheck(this, Topics);
+
+        var _this4 = _possibleConstructorReturn(this, (Topics.__proto__ || Object.getPrototypeOf(Topics)).call(this, props));
+
+        _this4.handleRemoveAll = _this4.handleRemoveAll.bind(_this4);
+        return _this4;
+    }
+
+    _createClass(Topics, [{
+        key: "handleRemoveAll",
+        value: function handleRemoveAll() {
+            console.log(this.props.topics); // this looses its scope here
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                null,
+                React.createElement(
+                    "button",
+                    { onClick: this.handleRemoveAll },
+                    "Remove All"
+                ),
+                this.props.topics.map(function (t) {
+                    return React.createElement(Option, { key: t, option: t });
+                })
+            );
+        }
+    }]);
+
+    return Topics;
+}(React.Component);
+
+var Option = function (_React$Component5) {
+    _inherits(Option, _React$Component5);
+
+    function Option() {
+        _classCallCheck(this, Option);
+
+        return _possibleConstructorReturn(this, (Option.__proto__ || Object.getPrototypeOf(Option)).apply(this, arguments));
+    }
+
+    _createClass(Option, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                null,
+                this.props.option
+            );
+        }
+    }]);
+
+    return Option;
+}(React.Component);
+
+//AddOption component
+
+
+var AddTopics = function (_React$Component6) {
+    _inherits(AddTopics, _React$Component6);
+
+    function AddTopics() {
+        _classCallCheck(this, AddTopics);
+
+        return _possibleConstructorReturn(this, (AddTopics.__proto__ || Object.getPrototypeOf(AddTopics)).apply(this, arguments));
+    }
+
+    _createClass(AddTopics, [{
+        key: "handleOnSubmit",
+        value: function handleOnSubmit(e) {
+            e.preventDefault();
+            console.log(e.target.elements.topic.value.trim());
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                null,
+                React.createElement(
+                    "form",
+                    { onSubmit: this.handleOnSubmit },
+                    React.createElement("input", { type: "text", name: "topic" }),
+                    React.createElement(
+                        "button",
+                        null,
+                        "Add Topics "
+                    )
+                )
+            );
+        }
+    }]);
+
+    return AddTopics;
+}(React.Component);
+
+//why we put classname with uppercase letter because we want to differentiate the html tags and also render would work with lowercase. However, there would be no error if we use lowercase
+
+
+ReactDOM.render(React.createElement(StudyTracker, null), document.getElementById('app'));
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+}();
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
+
+function _possibleConstructorReturn(self, call) {
+    if (!self) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var Counter = function (_React$Component) {
+    _inherits(Counter, _React$Component);
+
+    function Counter(props) {
+        _classCallCheck(this, Counter);
+
+        var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
+
+        _this.handleAddOne = _this.handleAddOne.bind(_this);
+        _this.handleMinusOne = _this.handleMinusOne.bind(_this);
+        _this.state = {
+            count: 0
+        };
+        return _this;
+    }
+
+    _createClass(Counter, [{
+        key: 'handleAddOne',
+        value: function handleAddOne() {
+            // //one way
+            // this.setState((prevState) => {
+            //     return {
+            //         count: prevState.count+1
+            //     };
+            // });
+            this.setState({ count: this.state.count + 1 });
+        }
+    }, {
+        key: 'handleMinusOne',
+        value: function handleMinusOne() {
+            this.setState(function (prevState) {
+                return {
+                    count: prevState.count - 1
+                };
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return React.createElement('div', null, React.createElement('h1', null, 'Count: ', this.state.count), React.createElement('button', { onClick: this.handleAddOne }, '+1'), React.createElement('button', { onClick: this.handleMinusOne }, '-1'));
+        }
+    }]);
+
+    return Counter;
+}(React.Component);
+
+ReactDOM.render(React.createElement(Counter, null), document.getElementById('app'));
+// let count = 0;
+// const addOne = () => {
+//     count++;
+//     renderCountMap();
+// };
+
+// const minusOne = () => {
+//     count--;
+//     renderCountMap();
+// };
+// const reset = () => {
+//     count = 0;
+//     renderCountMap();
+// };
+
+// const renderCountMap = () => {
+//     const template3 = (
+//         <div>
+//             <h1> Count: {count} </h1>
+//             <button onClick={addOne}>+1</button>
+//             <button onClick={minusOne}>-1</button>
+//             <button onClick={reset} >reset</button>
+//         </div>
+//     );
+//     ReactDOM.render(template3, appRoot);
+
+// };
+
+// renderCountMap();
